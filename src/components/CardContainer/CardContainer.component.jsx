@@ -12,25 +12,18 @@ const Container = styled.div`
 const CardContainer = ({ search, video }) => {
   const [videoList, setVideoList] = useState([]);
 
-  const fetchYt = async () => {
-    const apiKey = 'AIzaSyCvMiTRXMR0m35YMRpJZzU_pLIKs88MYkg';
-    const max = 25;
-
-    const response = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&type=video&part=snippet&maxResults=${max}&q=${search}`
-    );
-    if (!response.ok) {
-      throw Error(`Request failed with status code ${response.status}`);
-    }
-    return response.json();
-  };
-
   useEffect(() => {
     if (video) {
-      fetchYt().then((data) => {
-        console.log(data);
-        setVideoList(data.items);
-      });
+      const apiKey = 'AIzaSyCvMiTRXMR0m35YMRpJZzU_pLIKs88MYkg';
+      const max = 25;
+      fetch(
+        `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&type=video&part=snippet&maxResults=${max}&q=${search}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setVideoList(data.items);
+        });
     }
   }, [video]);
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
 import { server } from '../../mocks/server';
 import '@testing-library/jest-dom/extend-expect';
 import CardContainer from './CardContainer.component';
@@ -14,7 +15,16 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 test('renders cards when info is fetched successfully ', async () => {
-  const { getByText } = render(<CardContainer />);
+  // const container = render(<CardContainer />);
+  // console.log(container);
 
-  await waitFor(() => expect(getByText(/We are Wizeline./i)).toBeInTheDocument());
+  // most current one:
+  const { container, findByText } = render(<CardContainer />);
+  expect(await findByText(container, 'We are Wizeline')).toBeVisible();
+
+  // expect(
+  //   await findByText(getByTestId('card-container'), 'We are Wizeline')
+  // ).toBeVisible();
+  // expect(await findByText(container, 'We are Wizeline')).toBeVisible();
+  // await waitFor(() => expect(findByText(/We are Wizeline./i)).toBeInTheDocument());
 });
