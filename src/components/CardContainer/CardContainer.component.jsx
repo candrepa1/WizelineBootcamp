@@ -29,8 +29,7 @@ const CardContainer = ({ search, video }) => {
 
   return (
     <Container data-testid="card-container">
-      {videoList.length > 0 &&
-        videoList.map((videoIndiv) => (
+      {videoList.map((videoIndiv) => (
           <Cards
             key={videoIndiv.id.videoId}
             img={videoIndiv.snippet.thumbnails.medium.url}
