@@ -1,45 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Card, Image, InfoContainer, Title, Subtitle, Description } from './Cards.styled';
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #191919;
-  margin-right: 1.5rem;
-  margin-bottom: 2rem;
-  font-size: 1.4rem;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 15rem;
-  object-fit: cover;
-`;
-
-const Title = styled.h3`
-  color: white;
-  padding-bottom: 0.4rem;
-  text-decoration: none;
-`;
-
-const InfoContainer = styled.div`
-  padding: 1rem;
-  color: #aaaaaa;
-  text-decoration: none;
-`;
-
-const Subtitle = styled.h4`
-  font-weight: normal;
-`;
-
-const Description = styled.p`
-  margin-top: 0.8rem;
-`;
-
-const Cards = ({ img, title, channel, description, date, videoInfo, fullList }) => {
+const Cards = ({
+  testId,
+  img,
+  title,
+  channel,
+  description,
+  date,
+  videoInfo,
+  fullList,
+}) => {
   return (
-    <Card>
+    <Card data-testid={testId}>
       <Link
         to={{ pathname: `/${videoInfo.id.videoId}`, props: { videoInfo, fullList } }}
         style={{ textDecoration: 'none' }}
