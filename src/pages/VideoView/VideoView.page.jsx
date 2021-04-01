@@ -24,7 +24,7 @@ const VideoView = () => {
             width="100%"
             height="500"
             frameBorder="0"
-            src={`http://www.youtube.com/embed/${location.props.videoInfo.id.videoId}`}
+            src={`https://www.youtube.com/embed/${location.props.videoInfo.id.videoId}`}
           />
           <VideoDescription>
             <Title>{location.props.videoInfo.snippet.title}</Title>
