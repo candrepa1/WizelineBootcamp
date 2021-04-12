@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-export const VideoContainer = styled.div`
-  padding: 1rem;
-  width: 90%;
-  background-color: #191919;
-  font-size: 1.6rem;
-  font-family: 'Roboto', sans-serif;
-`;
-
 export const IFrame = styled.iframe`
   border-radius: 1rem;
   margin-bottom: 1rem;
@@ -28,7 +20,16 @@ export const Description = styled.p`
 `;
 
 export const MainContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: 100vh;
+`;
+
+export const VideoContainer = styled.div`
+  padding: 1rem;
+  background-color: #191919;
+  font-size: 1.6rem;
+  font-family: 'Roboto', sans-serif;
 `;
 
 export const CardContainer = styled.div`
@@ -36,4 +37,5 @@ export const CardContainer = styled.div`
   flex-direction: column;
   padding: 1rem;
   background-color: #191919;
+  overflow: scroll;
 `;
