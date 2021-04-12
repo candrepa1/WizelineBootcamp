@@ -21,7 +21,7 @@ export const Description = styled.p`
 
 export const MainContainer = styled.div`
   display: grid;
-  grid-template-columns: 75% 25%;
+  grid-template-columns: 70% 30%;
   grid-template-rows: 100vh;
 `;
 

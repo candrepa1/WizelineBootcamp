@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 const useFetch = (search) => {
   const [videoList, setVideoList] = useState([]);
+  const [error, setError] = useState('');
 
   const getFromYoutube = async () => {
     try {
@@ -10,8 +11,8 @@ const useFetch = (search) => {
       );
       const data = await res.json();
       setVideoList(data.items);
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      setError(e.message);
     }
   };
 
@@ -19,7 +20,7 @@ const useFetch = (search) => {
     getFromYoutube();
   }, [search]);
 
-  return videoList;
+  return { videoList, error };
 };
 
 export default useFetch;
