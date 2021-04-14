@@ -1,33 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-const RCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 1.6rem;
-  font-family: 'Roboto', sans-serif;
-`;
-
-const Div = styled.div`
-  display: flex;
-  color: white;
-`;
-
-const Thumbnail = styled.img`
-  width: 13rem;
-  height: 12rem;
-  margin-right: 1rem;
-`;
-
-const Title = styled.p`
-  width: 50%;
-  text-align: start;
-`;
-
-const Hr = styled.hr`
-  margin: 1rem 0;
-`;
+import { RCard, Div, Thumbnail, Title, Hr } from './RelatedCard.styled';
 
 const RelatedCard = ({ videoInfo, fullList }) => {
   return (

@@ -1,37 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import useFetch from '../../hooks/useFetch';
 import Cards from '../Cards/Cards.component';
+import { Container } from './CardContainer.styled';
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding-left: 1.5rem;
-  padding-top: 1.5rem;
-`;
-
-const CardContainer = ({ search, video }) => {
-  const [videoList, setVideoList] = useState([]);
-
-  useEffect(() => {
-    if (video) {
-      const apiKey = 'AIzaSyCvMiTRXMR0m35YMRpJZzU_pLIKs88MYkg';
-      const max = 25;
-      fetch(
-        `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&type=video&part=snippet&maxResults=${max}&q=${search}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setVideoList(data.items);
-        });
-    }
-  }, [video]);
+const CardContainer = ({ video }) => {
+  const { videoList, error } = useFetch(video);
 
   return (
     <Container data-testid="card-container">
-      {videoList.map((videoIndiv) => (
+      {error ? (
+        <h1>There has been an error: {error}</h1>
+      ) : (
+        videoList.map((videoIndiv) => (
           <Cards
-            key={videoIndiv.id.videoId}
+            testId={videoIndiv.etag}
+            key={videoIndiv.etag}
             img={videoIndiv.snippet.thumbnails.medium.url}
             title={videoIndiv.snippet.title}
             channel={videoIndiv.snippet.channelTitle}
@@ -40,7 +23,8 @@ const CardContainer = ({ search, video }) => {
             videoInfo={videoIndiv}
             fullList={videoList}
           />
-        ))}
+        ))
+      )}
     </Container>
   );
 };
