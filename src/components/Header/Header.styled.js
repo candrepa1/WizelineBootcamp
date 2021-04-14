@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const NavBar = styled.nav`
-  background-color: #212121;
+  background-color: ${(props) => props.theme.navBar};
   width: 100vw;
   color: white;
   padding: 1rem 2.4rem;
@@ -26,8 +26,8 @@ export const Search = styled.form`
 `;
 
 export const TextField = styled.input`
-  color: #e2e2e2;
-  background-color: #131313;
+  color: ${(props) => props.theme.textField.color};
+  background-color: ${(props) => props.theme.textField.backgroundColor};
   font-size: 1.6rem;
   border: 0.1rem solid #303030;
   border-radius: 0.5rem 0 0 0.5rem;
@@ -39,8 +39,8 @@ export const TextFieldButton = styled.button`
   border-radius: 0 0.5rem 0.5rem 0;
   width: 6rem;
   border: 0;
-  background-color: #323232;
-  color: #6f6f6f;
+  background-color: ${(props) => props.theme.submitButton.backgroundColor};
+  color: ${(props) => props.theme.submitButton.color};
 `;
 
 export const ImgWrapper = styled.div`

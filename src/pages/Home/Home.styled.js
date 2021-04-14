@@ -5,5 +5,5 @@ export const Main = styled.div`
   justify-content: center;
   padding: 4rem 10rem 3rem;
   font-family: 'Roboto', sans-serif;
-  background-color: #191919;
+  background-color: ${(props) => props.theme.body};
 `;

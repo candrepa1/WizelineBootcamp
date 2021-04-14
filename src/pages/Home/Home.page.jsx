@@ -1,27 +1,15 @@
-import React, { useState } from 'react';
-import Header from '../../components/Header/Header.component';
+import React, { useContext } from 'react';
 import CardContainer from '../../components/CardContainer/CardContainer.component';
 import { Main } from './Home.styled';
+import { SearchContext } from '../../context/searchContext/SearchContextProvider';
 
 function HomePage() {
-  const [input, setInput] = useState('wizeline');
-  const [videos, setVideos] = useState('wizeline');
-
-  const handleChange = (e) => {
-    setInput(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    console.log(input);
-    e.preventDefault();
-    setVideos(input);
-  };
+  const { term } = useContext(SearchContext);
 
   return (
     <>
-      <Header change={handleChange} submit={handleSubmit} text={input} />
       <Main>
-        <CardContainer video={videos} />
+        <CardContainer video={term} />
       </Main>
     </>
   );

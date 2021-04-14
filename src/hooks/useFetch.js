@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useContext } from 'react';
+import { FetchVideosContext } from '../context/fetchVideoContext/FetchVideosContextProvider';
 
 const useFetch = (search) => {
-  const [videoList, setVideoList] = useState([]);
-  const [error, setError] = useState('');
+  const { state, dispatch } = useContext(FetchVideosContext);
 
   const getFromYoutube = async () => {
     try {
@@ -10,9 +10,9 @@ const useFetch = (search) => {
         `https://www.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_API_KEY}&type=video&part=snippet&maxResults=25&q=${search}`
       );
       const data = await res.json();
-      setVideoList(data.items);
+      dispatch({ type: 'FETCH_VIDEOS', payload: data.items });
     } catch (e) {
-      setError(e.message);
+      dispatch({ type: 'FETCH_VIDEOS_ERROR', payload: e.message });
     }
   };
 
@@ -20,7 +20,7 @@ const useFetch = (search) => {
     getFromYoutube();
   }, [search]);
 
-  return { videoList, error };
+  return { videoList: state.videoList, error: state.error };
 };
 
 export default useFetch;

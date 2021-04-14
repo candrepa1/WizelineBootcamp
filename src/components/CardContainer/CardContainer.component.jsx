@@ -21,7 +21,6 @@ const CardContainer = ({ video }) => {
             description={videoIndiv.snippet.description}
             date={videoIndiv.snippet.publishedAt}
             videoInfo={videoIndiv}
-            fullList={videoList}
           />
         ))
       )}

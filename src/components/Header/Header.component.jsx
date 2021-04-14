@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import Switch from 'react-input-switch';
 import { Link } from 'react-router-dom';
 import {
@@ -15,9 +15,18 @@ import {
   ImgWrapper,
   Image,
 } from './Header.styled';
+import { SearchContext } from '../../context/searchContext/SearchContextProvider';
 
-const Header = ({ change, submit, text }) => {
-  const [value, setValue] = useState('light');
+const Header = ({ theme, toggle }) => {
+  const { input, submitHandler, changeHandler } = useContext(SearchContext);
+
+  const toggleHandler = () => {
+    if (theme === 'dark') {
+      toggle('light');
+    } else {
+      toggle('dark');
+    }
+  };
 
   return (
     <NavBar>
@@ -34,8 +43,8 @@ const Header = ({ change, submit, text }) => {
           </Link>
         </IconWrapper>
       </Section>
-      <Search onSubmit={(e) => submit(e)}>
-        <TextField placeholder="Search" value={text} onChange={(e) => change(e)} />
+      <Search onSubmit={submitHandler}>
+        <TextField value={input} onChange={changeHandler} />
         <TextFieldButton type="submit">
           <i className="fas fa-search fa-lg" />
         </TextFieldButton>
@@ -43,14 +52,14 @@ const Header = ({ change, submit, text }) => {
       <Section>
         <Section>
           <DarkMode>
-            <span role="img" aria-label="light-mode">
-              🌞
-            </span>
-          </DarkMode>
-          <Switch on="dark" off="light" value={value} onChange={setValue} />
-          <DarkMode>
             <span role="img" aria-label="dark-mode">
               🌚
+            </span>
+          </DarkMode>
+          <Switch on="light" off="dark" value={theme} onChange={toggleHandler} />
+          <DarkMode>
+            <span role="img" aria-label="light-mode">
+              🌞
             </span>
           </DarkMode>
         </Section>
