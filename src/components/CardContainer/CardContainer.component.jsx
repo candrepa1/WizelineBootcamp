@@ -1,5 +1,5 @@
 import React from 'react';
-import useFetch from '../../hooks/useFetch';
+import useFetch from '../../hooks/useFetch/useFetch';
 import Cards from '../Cards/Cards.component';
 import { Container } from './CardContainer.styled';
 

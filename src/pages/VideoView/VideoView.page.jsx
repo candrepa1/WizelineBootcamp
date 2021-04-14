@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import RelatedCard from '../../components/RelatedCard/RelatedCard.component';
-import useFetch from '../../hooks/useFetch';
+import useFetch from '../../hooks/useFetch/useFetch';
 import {
   MainContainer,
   VideoContainer,

@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
+import { render, screen } from '../../utils/test-utils';
 import { server } from '../../mocks/server';
 import '@testing-library/jest-dom/extend-expect';
 import CardContainer from './CardContainer.component';

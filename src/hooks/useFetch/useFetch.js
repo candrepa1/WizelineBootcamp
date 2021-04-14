@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { FetchVideosContext } from '../context/fetchVideoContext/FetchVideosContextProvider';
+import { FetchVideosContext } from '../../context/fetchVideoContext/FetchVideosContextProvider';
 
 const useFetch = (search) => {
   const { state, dispatch } = useContext(FetchVideosContext);
