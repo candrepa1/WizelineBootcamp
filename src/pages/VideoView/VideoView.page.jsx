@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from '../../components/Header/Header.component';
 import RelatedCard from '../../components/RelatedCard/RelatedCard.component';
+import useFetch from '../../hooks/useFetch/useFetch';
 import {
   MainContainer,
   VideoContainer,
@@ -15,9 +15,10 @@ import {
 const VideoView = () => {
   const location = useLocation();
 
+  const { videoList, error } = useFetch(location.props.videoInfo.snippet.title);
+
   return (
     <>
-      <Header />
       <MainContainer>
         <VideoContainer>
           <IFrame
@@ -32,14 +33,12 @@ const VideoView = () => {
           </VideoDescription>
         </VideoContainer>
         <CardContainer>
-          {location.props.fullList.length > 0 &&
-            location.props.fullList.map((vid) => (
-              <RelatedCard
-                key={vid.id.videoId}
-                videoInfo={vid}
-                fullList={location.props.fullList}
-              />
-            ))}
+          {error ? (
+            <h1>There has been an error: {error}</h1>
+          ) : (
+            videoList.map((vid) => <RelatedCard key={vid.id.videoId} videoInfo={vid} />)
+          )}
+          ;
         </CardContainer>
       </MainContainer>
     </>

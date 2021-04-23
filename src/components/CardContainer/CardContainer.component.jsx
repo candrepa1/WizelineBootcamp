@@ -1,5 +1,5 @@
 import React from 'react';
-import useFetch from '../../hooks/useFetch';
+import useFetch from '../../hooks/useFetch/useFetch';
 import Cards from '../Cards/Cards.component';
 import { Container } from './CardContainer.styled';
 
@@ -21,7 +21,6 @@ const CardContainer = ({ video }) => {
             description={videoIndiv.snippet.description}
             date={videoIndiv.snippet.publishedAt}
             videoInfo={videoIndiv}
-            fullList={videoList}
           />
         ))
       )}
