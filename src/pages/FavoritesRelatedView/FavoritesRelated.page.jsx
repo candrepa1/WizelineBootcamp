@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import RelatedCard from '../../components/RelatedCard/RelatedCard.component';
-import useFetch from '../../hooks/useFetch/useFetch';
+import { LoginContext } from '../../context/loginContext/LoginContextProvider';
+import useButtonFavorites from '../../hooks/useButtonFavorites/useButtonFavorites';
+
 import {
   MainContainer,
   VideoContainer,
@@ -13,20 +15,17 @@ import {
   Button,
   ButtonContainer,
   Div,
-} from './VideoView.styled';
-import { LoginContext } from '../../context/loginContext/LoginContextProvider';
-import useButtonFavorites from '../../hooks/useButtonFavorites/useButtonFavorites';
-import { LoginTitle, HiddenModal, Modal, ModalContainer } from '../Home/Home.styled';
-import Form from '../../components/Form/Form.component';
+} from '../VideoView/VideoView.styled';
 
-const VideoView = ({ modal, modalToggle }) => {
+const FavoritesRelated = () => {
   const location = useLocation();
-
-  const { videoList, error } = useFetch(location.state.videoInfo.snippet.title);
+  const [videoList, setVideoList] = useState([]);
   const { sessionData } = useContext(LoginContext);
   const { handleClick, message } = useButtonFavorites(location.state.videoInfo);
 
-  const MyModal = modal ? Modal : HiddenModal;
+  useEffect(() => {
+    setVideoList(JSON.parse(localStorage.getItem('Favorites')));
+  }, []);
 
   return (
     <>
@@ -54,29 +53,17 @@ const VideoView = ({ modal, modalToggle }) => {
           </VideoDescription>
         </VideoContainer>
         <CardContainer>
-          {error ? (
-            <h1>There has been an error: {error}</h1>
-          ) : (
-            videoList.map((vid) => (
-              <RelatedCard
-                key={vid.id.videoId}
-                videoInfo={vid}
-                pathname={`/${vid.id.videoId}`}
-              />
-            ))
-          )}
+          {videoList.map((vid) => (
+            <RelatedCard
+              key={vid.id.videoId}
+              videoInfo={vid}
+              pathname={`/favorites/${vid.id.videoId}`}
+            />
+          ))}
         </CardContainer>
       </MainContainer>
-      {modal && (
-        <ModalContainer>
-          <MyModal>
-            <LoginTitle>Login</LoginTitle>
-            <Form modal={modal} modalToggle={modalToggle} />
-          </MyModal>
-        </ModalContainer>
-      )}
     </>
   );
 };
 
-export default VideoView;
+export default FavoritesRelated;

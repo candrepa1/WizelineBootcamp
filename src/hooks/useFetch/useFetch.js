@@ -7,7 +7,7 @@ const useFetch = (search) => {
   const getFromYoutube = async () => {
     try {
       const res = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_API_KEY}&type=video&part=snippet&maxResults=25&q=${search}`
+        `https://www.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_API_KEY}&type=video&part=snippet&maxResults=20&q=${search}`
       );
       const data = await res.json();
       dispatch({ type: 'FETCH_VIDEOS', payload: data.items });

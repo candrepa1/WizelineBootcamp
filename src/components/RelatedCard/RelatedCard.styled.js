@@ -9,7 +9,7 @@ export const RCard = styled.div`
 
 export const Div = styled.div`
   display: flex;
-  color: white;
+  color: ${(props) => props.theme.title};
 `;
 
 export const Thumbnail = styled.img`

@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Switch from 'react-input-switch';
-import { Link } from 'react-router-dom';
 import {
   NavBar,
   Section,
-  Menu,
   IconWrapper,
   YtIcon,
   Title,
@@ -14,11 +12,18 @@ import {
   DarkMode,
   ImgWrapper,
   Image,
+  LoginMenu,
+  NavBarItem,
+  Ul,
+  Li,
 } from './Header.styled';
 import { SearchContext } from '../../context/searchContext/SearchContextProvider';
+import { LoginContext } from '../../context/loginContext/LoginContextProvider';
 
-const Header = ({ theme, toggle }) => {
+const Header = ({ theme, toggle, modalToggle, modal }) => {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const { input, submitHandler, changeHandler } = useContext(SearchContext);
+  const { sessionData, logout } = useContext(LoginContext);
 
   const toggleHandler = () => {
     if (theme === 'dark') {
@@ -31,16 +36,24 @@ const Header = ({ theme, toggle }) => {
   return (
     <NavBar>
       <Section>
-        <Menu>
-          <i className="fas fa-bars fa-2x" />
-        </Menu>
         <IconWrapper>
           <YtIcon>
             <i className="fab fa-youtube fa-2x" />
           </YtIcon>
-          <Link to="/" style={{ textDecoration: 'none' }}>
-            <Title data-testid="title-content">Wizeline Challenge</Title>
-          </Link>
+          <Ul>
+            <Li>
+              <NavBarItem to="/">
+                <Title data-testid="title-content">HOME</Title>
+              </NavBarItem>
+            </Li>
+            {sessionData && (
+              <Li>
+                <NavBarItem to="/favorites">
+                  <Title data-testid="hidden-title">FAVORITES</Title>
+                </NavBarItem>
+              </Li>
+            )}
+          </Ul>
         </IconWrapper>
       </Section>
       <Search onSubmit={submitHandler}>
@@ -52,23 +65,50 @@ const Header = ({ theme, toggle }) => {
       <Section>
         <Section>
           <DarkMode>
-            <span role="img" aria-label="dark-mode">
+            <span data-testid="dm-id" role="img" aria-label="dark-mode">
               🌚
             </span>
           </DarkMode>
           <Switch on="light" off="dark" value={theme} onChange={toggleHandler} />
           <DarkMode>
-            <span role="img" aria-label="light-mode">
+            <span data-testid="lm-id" role="img" aria-label="light-mode">
               🌞
             </span>
           </DarkMode>
         </Section>
         <ImgWrapper>
           <Image
+            onClick={() => setIsLoginOpen(!isLoginOpen)}
             data-testid="image"
-            src="https://www.vertexacc.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
+            src={
+              sessionData
+                ? sessionData.avatarUrl
+                : 'https://www.vertexacc.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
+            }
             alt="user"
           />
+          {isLoginOpen &&
+            (sessionData ? (
+              <LoginMenu
+                type="button"
+                onClick={() => {
+                  logout();
+                  setIsLoginOpen(!isLoginOpen);
+                }}
+              >
+                Logout
+              </LoginMenu>
+            ) : (
+              <LoginMenu
+                type="button"
+                onClick={() => {
+                  modalToggle(!modal);
+                  setIsLoginOpen(!isLoginOpen);
+                }}
+              >
+                Login
+              </LoginMenu>
+            ))}
         </ImgWrapper>
       </Section>
     </NavBar>

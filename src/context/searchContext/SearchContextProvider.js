@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import useInput from '../../hooks/useInput';
+import useInput from '../../hooks/useInput/useInput';
 
 export const SearchContext = createContext();
 

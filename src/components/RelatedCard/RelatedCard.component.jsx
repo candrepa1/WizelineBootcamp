@@ -2,13 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { RCard, Div, Thumbnail, Title, Hr } from './RelatedCard.styled';
 
-const RelatedCard = ({ videoInfo }) => {
+const RelatedCard = ({ videoInfo, pathname }) => {
   return (
     <RCard>
-      <Link
-        to={{ pathname: `/${videoInfo.id.videoId}`, props: { videoInfo } }}
-        style={{ textDecoration: 'none' }}
-      >
+      <Link to={{ pathname, props: { videoInfo } }} style={{ textDecoration: 'none' }}>
         <Div>
           <Thumbnail
             src={videoInfo.snippet.thumbnails.medium.url}
