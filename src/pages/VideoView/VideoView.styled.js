@@ -10,13 +10,13 @@ export const VideoDescription = styled.div`
 `;
 
 export const Title = styled.h3`
-  color: white;
+  color: ${(props) => props.theme.title};
   padding-bottom: 0.4rem;
 `;
 
 export const Description = styled.p`
   margin-top: 0.8rem;
-  color: #aaaaaa;
+  color: ${(props) => props.theme.fontColor};
 `;
 
 export const MainContainer = styled.div`
@@ -27,7 +27,7 @@ export const MainContainer = styled.div`
 
 export const VideoContainer = styled.div`
   padding: 1rem;
-  background-color: #191919;
+  background-color: ${(props) => props.theme.body};
   font-size: 1.6rem;
   font-family: 'Roboto', sans-serif;
 `;
@@ -36,6 +36,25 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: #191919;
+  background-color: ${(props) => props.theme.body};
   overflow: scroll;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+`;
+
+export const Button = styled.button`
+  padding: 10px;
+  font-size: 1.6rem;
+  border-radius: 4px;
+  color: ${(props) => props.theme.submitButton.color};
+  &:hover {
+    background: ${(props) => props.theme.submitButton.backgroundColor};
+  }
+`;
+
+export const Div = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

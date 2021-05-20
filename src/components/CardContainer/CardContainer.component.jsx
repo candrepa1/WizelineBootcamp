@@ -21,6 +21,7 @@ const CardContainer = ({ video }) => {
             description={videoIndiv.snippet.description}
             date={videoIndiv.snippet.publishedAt}
             videoInfo={videoIndiv}
+            pathname={`/videos/${videoIndiv.id.videoId}`}
           />
         ))
       )}

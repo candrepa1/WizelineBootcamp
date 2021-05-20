@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const NavBar = styled.nav`
   background-color: ${(props) => props.theme.navBar};
@@ -10,6 +11,8 @@ export const NavBar = styled.nav`
   align-items: center;
   font-size: 1.6rem;
   font-family: 'Roboto', sans-serif;
+  position: relative;
+  z-index: 2;
 `;
 
 export const Section = styled.div`
@@ -57,10 +60,6 @@ export const Image = styled.img`
   object-fit: cover;
 `;
 
-export const Menu = styled.div`
-  margin-right: 2.5rem;
-`;
-
 export const IconWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -68,15 +67,54 @@ export const IconWrapper = styled.div`
 
 export const YtIcon = styled.div`
   color: #556cd6;
-  margin-right: 0.5rem;
+  margin-right: 4rem;
+  margin-left: 1rem;
 `;
 
 export const Title = styled.span`
-  font-weight: bold;
-  font-size: 2.8rem;
+  font-size: 1.6rem;
   color: white;
 `;
 
 export const DarkMode = styled.div`
   margin: 0 1rem;
+`;
+
+export const LoginMenu = styled.button`
+  font-size: 1.7rem;
+  padding: 10px;
+  border-radius: 2px;
+`;
+
+export const NavBarItem = styled(Link)`
+  text-decoration: none;
+  &::after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #fff;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+  &:hover:after {
+    width: 100%;
+    left: 0;
+  }
+`;
+
+export const Ul = styled.ul`
+  list-style: none;
+  display: flex;
+  width: 200px;
+`;
+
+export const Li = styled.li`
+  padding: 15px 0;
+  position: relative;
+  width: 50%;
+  text-align: center;
 `;
